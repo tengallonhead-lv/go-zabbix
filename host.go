@@ -208,71 +208,66 @@ func (c *Session) GetHosts(params HostGetParams) ([]Host, error) {
 
 //创建主机接口参数类型Interfaces
 type Interfaces struct {
-	Type   	int `json:"type"`
-	Main   	int `json:"main"`
-	Useip 	int `json:"useip"`
-	IP 		string `json:"ip"`
-	Dns 	string `json:"dns"`
-	Port 	string `json:"port"`
+	Type  int    `json:"type"`
+	Main  int    `json:"main"`
+	Useip int    `json:"useip"`
+	IP    string `json:"ip"`
+	Dns   string `json:"dns"`
+	Port  string `json:"port"`
 }
 
 //创建主机接口参数类型 group数组
 type Groups struct {
-	Groupid 	string `json:"groupid"`
+	Groupid string `json:"groupid"`
 }
 
 //创建主机接口参数类型 模板数组
 type Templates struct {
-	Templateid 	string `json:"templateid"`
+	Templateid string `json:"templateid"`
 }
 
 //创建主机参数
 type HostCreateParames struct {
-	Host 	string `json:"host"`
+	Host       string        `json:"host"`
 	Interfaces []interface{} `json:"interfaces"`
-	Groups  []interface{} `json:"groups"`
-	Templates []interface{} `json:"templates,omitempty"`
+	Groups     []interface{} `json:"groups"`
+	Templates  []interface{} `json:"templates,omitempty"`
 }
 
-type ResponseData struct {
-	Jsonrpc 	string `json:"jsonrpc"`
-	//Method  	string `json:"method"`
-	Params  	HostCreateParames `json:"params"`
-	Auth 		string `json:"auth"`
-	ID 			int `json:"id"`
+type HostCreateResp struct {
+	HostIds []string `json:"hostids,omitempty"`
 }
 
 //创建主机
-func (c *Session)CreateHost(params *HostCreateParames) (resp map[string]interface{}, err error) {
+func (c *Session) CreateHost(params *HostCreateParames) (resp HostCreateResp, err error) {
 	//resp := make([]interface{},1)
-	err = c.Get("host.create",params,&resp)
-	fmt.Printf("params is %v\n",*params)
+	err = c.Get("host.create", params, &resp)
+	fmt.Printf("params is %v\n", *params)
 	if err != nil {
-		return nil, err
+		return resp, err
 	}
 	return resp, nil
 }
-
 
 type HostInterfaceResult struct {
 	InterfaceId string `json:"interfaceid,omitempty"`
 	HostId      string `json:"hostid,omitempty"`
 	Main        string `json:"main,omitempty"`
 	Type        string `json:"type,omitempty"`
-	UseIp string `json:"useip,omitempty"`
-	Ip string `json:"ip,omitempty"`
-	Dns string `json:"dns,omitempty"`
-	Port string `json:"port,omitempty"`
-	Bulk string `json:"bulk,omitempty"`
+	UseIp       string `json:"useip,omitempty"`
+	Ip          string `json:"ip,omitempty"`
+	Dns         string `json:"dns,omitempty"`
+	Port        string `json:"port,omitempty"`
+	Bulk        string `json:"bulk,omitempty"`
 }
 type HostInterfaceIdResponse struct {
-	Jsonrpc string `json:"jsonrpc"`
+	Jsonrpc string              `json:"jsonrpc"`
 	Result  HostInterfaceResult `json:"result,omitempty"`
-	Id    int `json:"id,omitempty"`
+	Id      int                 `json:"id,omitempty"`
 }
 
-func (c *Session) GetHostInterfaceID (params HostgroupGetParams) (resp HostInterfaceIdResponse, err error) {
-	err = c.Get("hostinterface.get",params,&resp)
+func (c *Session) GetHostInterfaceID(params HostgroupGetParams) (resp HostInterfaceIdResponse, err error) {
+	err = c.Get("hostinterface.get", params, &resp)
 	if err != nil {
 		return resp, err
 	}
