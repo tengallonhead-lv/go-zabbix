@@ -1,4 +1,4 @@
-module go-zabbix
+module github.com/tengallonhead-lv/go-zabbix
 
 go 1.18
 
