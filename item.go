@@ -83,9 +83,9 @@ func (c *Session) ItemCreate(params []ItemCreateParams) (resp ItemResponse, err 
 }
 
 //删除监控项
-func (c *Session) ItemDelete(param []string) (resp ItemResponse, err error) {
+func (c *Session) ItemDelete(hostids []string) (resp ItemResponse, err error) {
 	params := map[string][]string{
-		"params": param,
+		"params": hostids,
 	}
 	err = c.InerSession.Get("item.delete", params, &resp)
 	if err != nil {
