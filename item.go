@@ -69,15 +69,24 @@ type ItemCreateParams struct {
 	WithTriggers bool `json:"with_triggers,omitempty"`
 }
 
-type ItemCreateResponse struct {
+type ItemResponse struct {
 	ItemIds []string `json:"itemids,omitempty"`
 }
 
 //创建监控项函数
-func (c *Session) ItemCreate(params []ItemCreateParams) (resp ItemCreateResponse, err error) {
-	err = c.OriginSession.Get("item.create", params, &resp)
+func (c *Session) ItemCreate(params []ItemCreateParams) (resp ItemResponse, err error) {
+	err = c.InerSession.Get("item.create", params, &resp)
 	if err != nil {
 		return resp, err
+	}
+	return resp, nil
+}
+
+//删除监控项
+func (c *Session) ItemDelete(params []string) (resp ItemResponse, err error) {
+	err = c.InerSession.Get("item.delete", params, &resp)
+	if err != nil {
+		return resp, nil
 	}
 	return resp, nil
 }

@@ -16,7 +16,7 @@ func (c *Session) CreateHostgroup(hostgroupName string) (resp HostgroupCreateRes
 		Name: hostgroupName,
 	}
 
-	err = c.OriginSession.Get("hostgroup.create", params, resp)
+	err = c.InerSession.Get("hostgroup.create", params, resp)
 	if err != nil {
 		fmt.Printf("创建hostgroup 出错，错误原因为%s\n", err.Error())
 		return HostgroupCreateResponse{}, err

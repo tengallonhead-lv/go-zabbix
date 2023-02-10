@@ -37,7 +37,7 @@ type HostCreateResp struct {
 //创建主机
 func (c *Session) CreateHost(params *HostCreateParames) (resp HostCreateResp, err error) {
 	//resp := make([]interface{},1)
-	err = c.OriginSession.Get("host.create", params, &resp)
+	err = c.InerSession.Get("host.create", params, &resp)
 	fmt.Printf("params is %v\n", *params)
 	if err != nil {
 		return resp, err
