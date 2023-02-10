@@ -1,6 +1,59 @@
 package go_zabbix
 
-import "github.com/cavaliercoder/go-zabbix"
+import (
+	"fmt"
+	"github.com/cavaliercoder/go-zabbix"
+)
+
+// 查询监控项
+type Item struct {
+	// HostID is the unique ID of the Host.
+	HostID int
+
+	// ItemID is the unique ID of the Item.
+	ItemID int
+
+	// Itemname is the technical name of the Item.
+	ItemName string
+
+	//Key_ is the key_ of the Item
+	Key_ string
+
+	// ItemDescr is the description of the Item.
+	ItemDescr string
+
+	// LastClock is the last Item epoh time.
+	LastClock int
+
+	// LastValue is the last value of the Item.
+	LastValue string
+
+	// LastValueType is the type of LastValue
+	// 0 - float; 1 - text; 3 - int;
+	LastValueType int
+}
+
+func (c *Session) GetItems(params zabbix.ItemGetParams) ([]Item, error) {
+	items := make([]jItem, 0)
+	err := c.InerSession.Get("item.get", params, &items)
+	if err != nil {
+		return nil, err
+	}
+	if len(items) == 0 {
+		return nil, zabbix.ErrNotFound
+	}
+	// map JSON Events to Go Events
+	out := make([]Item, len(items))
+	for i, jitem := range items {
+		item, err := jitem.Item()
+		if err != nil {
+			return nil, fmt.Errorf("Error mapping Item %d in response: %v", i, err)
+		}
+		out[i] = *item
+	}
+
+	return out, nil
+}
 
 type ItemCreateParams struct {
 	zabbix.GetParameters
@@ -83,9 +136,9 @@ func (c *Session) ItemCreate(params []ItemCreateParams) (resp ItemResponse, err 
 }
 
 //删除监控项
-func (c *Session) ItemDelete(hostids []string) (resp ItemResponse, err error) {
+func (c *Session) ItemDelete(itemids []string) (resp ItemResponse, err error) {
 	params := map[string][]string{
-		"params": hostids,
+		"params": itemids,
 	}
 	err = c.InerSession.Get("item.delete", params, &resp)
 	if err != nil {
