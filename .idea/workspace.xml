@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8c2355a-611e-4f74-b91e-ce5f0f70b6b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/item_json.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item.go" beforeDir="false" afterPath="$PROJECT_DIR$/item.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/session.go" beforeDir="false" afterPath="$PROJECT_DIR$/session.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,13 +124,21 @@
       <option name="project" value="LOCAL" />
       <updated>1675998967111</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[fix] item.get response without key_">
+      <created>1676012551122</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676012551122</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[feat] new api function item.delete" />
     <MESSAGE value="[fix] modify go.mod" />
-    <option name="LAST_COMMIT_MESSAGE" value="[fix] modify go.mod" />
+    <MESSAGE value="[fix] item.get response without key_" />
+    <option name="LAST_COMMIT_MESSAGE" value="[fix] item.get response without key_" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
